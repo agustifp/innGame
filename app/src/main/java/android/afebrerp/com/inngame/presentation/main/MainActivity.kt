@@ -30,13 +30,7 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
         mainPresenter = MainPresenterImpl(this)
         mainPresenter.paintInitialState()
         fab.setOnClickListener {
-            if (!mainPresenter.isGameRunning()) {
-                mainPresenter.startGame()
-                showSnackBar("Starting Production")
-            } else {
-                showSnackBar("Stopping Production")
-                mainPresenter.stopGame()
-            }
+            clickLogic()
         }
     }
 
@@ -99,10 +93,19 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
         startActivity(Intent(this, GameOverActivity::class.java))
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(gameOverReached){
+    private fun clickLogic() {
+        if (gameOverReached) {
+            mainPresenter.paintInitialState()
             mainPresenter.restartGame()
+            showSnackBar("Production restarted!")
+        } else {
+            if (!mainPresenter.isGameRunning()) {
+                mainPresenter.startGame()
+                showSnackBar("Starting Production!")
+            } else {
+                showSnackBar("Stopping Production!")
+                mainPresenter.stopGame()
+            }
         }
     }
 }
