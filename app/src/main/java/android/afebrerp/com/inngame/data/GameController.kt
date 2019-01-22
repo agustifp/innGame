@@ -75,9 +75,8 @@ object GameController : KoinComponent {
     private var isPlayerAtInitialState = false
 
     fun startGame() {
-
         isGameRunning = true
-        if(!isPlayerAtInitialState) {
+        if (!isPlayerAtInitialState) {
             isPlayerAtInitialState = true
             this.player = getInitialPlayerState()
         }
@@ -162,5 +161,10 @@ object GameController : KoinComponent {
                 it?.let { errorGameControlerListener(it.customMessage) }
             })
         }
+    }
+
+    fun restartGame() {
+        isPlayerAtInitialState = false
+        startGame()
     }
 }

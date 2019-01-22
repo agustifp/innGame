@@ -9,7 +9,7 @@ object CostsUtils {
         return costs.fibre <= resources.fibre && costs.metal <= resources.metal
     }
 
-    fun applyCosts(costs: Costs, resources: Resources){
+    fun applyCosts(costs: Costs, resources: Resources) {
         resources.metal -= costs.metal
         resources.fibre -= costs.fibre
     }

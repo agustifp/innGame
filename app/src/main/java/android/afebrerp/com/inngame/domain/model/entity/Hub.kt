@@ -5,11 +5,10 @@ class Hub {
     val trailers: MutableList<Trailer> = mutableListOf()
     private val INITIAL_METAL_COST = 4000
     private val INITIAL_FIBRE_COST = 1500
-    val constructionSeconds: Int = 30
     val costs: Costs =
         Costs(INITIAL_METAL_COST, INITIAL_FIBRE_COST)
     var MAX_LEVEL = 3
-    var level:Int = 0
+    var level: Int = 0
         set(value) {
             if (value <= MAX_LEVEL) {
                 field = value
@@ -18,7 +17,7 @@ class Hub {
                 costs.metal += 10 * costs.metal / 100
             }
         }
-    var capacity : Int = 4
+    var capacity: Int = 4 //If the capacity don't start with four it never reaches 10!
 
 }
 

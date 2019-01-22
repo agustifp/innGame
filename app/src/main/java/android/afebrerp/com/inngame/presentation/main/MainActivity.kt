@@ -21,6 +21,7 @@ import org.koin.standalone.KoinComponent
 
 class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
     private lateinit var mainPresenter: MainPresenter.Presenter
+    private var gameOverReached = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
             }
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
         gasolineResources.text = resources.gasoline.toString()
     }
 
-    override fun errorGameControlerListener(string: String) {
+    override fun errorGameControllerListener(string: String) {
         showSnackBar(string)
     }
 
@@ -91,7 +93,16 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
         Snackbar.make(parentView, string, Snackbar.LENGTH_LONG).show()
     }
 
+
     override fun onGameOver() {
+        gameOverReached = true
         startActivity(Intent(this, GameOverActivity::class.java))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(gameOverReached){
+            mainPresenter.restartGame()
+        }
     }
 }

@@ -8,9 +8,9 @@ import android.afebrerp.com.inngame.domain.model.params.CreateTrailerParams
 import android.afebrerp.com.inngame.domain.repository.TrailerRepository
 import kotlinx.coroutines.delay
 
-class TrailerRepositoryImpl: TrailerRepository {
+class TrailerRepositoryImpl : TrailerRepository {
 
-    override suspend fun generateIfAble(params : CreateTrailerParams):BaseEntity {
+    override suspend fun generateIfAble(params: CreateTrailerParams): BaseEntity {
         var affordable = false
         val trailer = Trailer()
         affordable = CostsUtils.canAffordCosts(trailer.costs, params.resources)

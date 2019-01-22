@@ -4,6 +4,10 @@ import android.afebrerp.com.inngame.data.GameController
 import android.util.Log
 
 class MainPresenterImpl(val view: MainPresenter.View) : MainPresenter.Presenter {
+    override fun restartGame() {
+        gameController.restartGame()
+    }
+
     override fun stopGame() {
         gameController.stopProduction()
     }
@@ -11,9 +15,10 @@ class MainPresenterImpl(val view: MainPresenter.View) : MainPresenter.Presenter 
     private val gameController = GameController
     private val TAG = "Presenter"
 
-    override fun paintInitialState(){
+    override fun paintInitialState() {
         view.paintFirstState(gameController.getInitialPlayerState())
     }
+
     override fun startGame() {
         gameController.startGame()
         setListeners()
@@ -49,14 +54,13 @@ class MainPresenterImpl(val view: MainPresenter.View) : MainPresenter.Presenter 
 
         gameController.errorGameControlerListener {
             Log.d(TAG, "Error : $it")
-            view.errorGameControlerListener(it)
+            view.errorGameControllerListener(it)
         }
 
         gameController.gameOverListener {
             view.onGameOver()
         }
     }
-
 
     private fun checkForUpdateLogic() {
         gameController.checkForUpdates()

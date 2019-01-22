@@ -18,7 +18,7 @@
                 android:layout_marginLeft="150dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/industry_good"
+                android:src="@drawable/industry"
                 android:tint="@color/colorPrimary"/>
 
         <LinearLayout

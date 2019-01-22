@@ -19,8 +19,10 @@ abstract class BaseUseCase<T : BaseEntity, Params : BaseParams> {
         private const val TAG: String = "BaseUseCase"
     }
 
-    fun executeAsync(params: Params, block: (T?) -> Unit,
-                     blockError: (BaseException?) -> Unit) {
+    fun executeAsync(
+        params: Params, block: (T?) -> Unit,
+        blockError: (BaseException?) -> Unit
+    ) {
         job = launchUI({
             launchRepoCallAsync(params, block)
         }, blockError)
@@ -39,32 +41,32 @@ abstract class BaseUseCase<T : BaseEntity, Params : BaseParams> {
     protected abstract suspend fun buildRepoCall(params: Params): T?
 
     private fun createExceptionHandler(blockError: (BaseException?) -> Unit) =
-            CoroutineExceptionHandler { _, e ->
-                launchUI({
-                    try {
-                        if (e is BaseException) {
-                            blockError(e)
-                        } else if (e is HttpException) {
-                            blockError(BackendException(Throwable(), 0, BackendResponseMapper.parseHttpException(e)))
-                        } else if (e is UnknownHostException || e is SocketTimeoutException) {
-                            blockError(BackendException(Throwable(), 0, "No internet connection."))
-                        }
-                    } catch (exception: Exception) {
-                        Log.e("BaseUseCase", "Unknown error: ", e)
-                        blockError(BackendException(e, 0, "Unknown error"))
+        CoroutineExceptionHandler { _, e ->
+            launchUI({
+                try {
+                    if (e is BaseException) {
+                        blockError(e)
+                    } else if (e is HttpException) {
+                        blockError(BackendException(Throwable(), 0, BackendResponseMapper.parseHttpException(e)))
+                    } else if (e is UnknownHostException || e is SocketTimeoutException) {
+                        blockError(BackendException(Throwable(), 0, "No internet connection."))
                     }
-                })
+                } catch (exception: Exception) {
+                    Log.e("BaseUseCase", "Unknown error: ", e)
+                    blockError(BackendException(e, 0, "Unknown error"))
+                }
+            })
 
-            }
+        }
 
     /**
      * Launch a coroutine in a new Thread.
      * @param block The block that will be executed inside coroutine
      */
     private suspend fun launchAsync(block: suspend CoroutineScope.() -> Unit) =
-            withContext(Dispatchers.IO) {
-                block()
-            }
+        withContext(Dispatchers.IO) {
+            block()
+        }
 
     private suspend fun withMainContext(block: () -> Unit) {
         withContext(Dispatchers.Main) {
@@ -77,9 +79,9 @@ abstract class BaseUseCase<T : BaseEntity, Params : BaseParams> {
      * @param block The block that will be executed inside coroutine
      */
     private fun launchUI(block: suspend CoroutineScope.() -> Unit, blockError: (BaseException?) -> Unit = {}): Job =
-            GlobalScope.launch(Dispatchers.Main + createExceptionHandler(blockError)) {
-                block()
-            }
+        GlobalScope.launch(Dispatchers.Main + createExceptionHandler(blockError)) {
+            block()
+        }
 
     /**
      * Cancels the current job execution.

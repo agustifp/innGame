@@ -4,11 +4,10 @@ import android.afebrerp.com.inngame.data.Constants
 import android.os.CountDownTimer
 
 class Industry {
-    private val TAG = "Industry"
+
     private val INITIAL_METAL_COST = 1500
     private val INITIAL_FIBRE_COST = 500
-    val costs: Costs =
-        Costs(INITIAL_METAL_COST, INITIAL_FIBRE_COST)
+    val costs: Costs = Costs(INITIAL_METAL_COST, INITIAL_FIBRE_COST)
     var MAX_LEVEL = 4
     var level: Int = 1
         set(value) {
@@ -20,15 +19,20 @@ class Industry {
         }
 
     private lateinit var productionTimer: CountDownTimer
+
     fun startProduction(block: (Resources) -> Unit) {
         productionTimer = object : CountDownTimer(Long.MAX_VALUE, Constants.CONSTRUCTION_SECONDS) {
             override fun onTick(millisUntilFinished: Long) {
-                block(Resources(2000, 1000, 20))
+                block(getDefaultProductionResources())
             }
 
             override fun onFinish() {}
         }
         productionTimer.start()
+    }
+
+    private fun getDefaultProductionResources(): Resources {
+        return Resources(2000, 1000, 20)
     }
 
     fun stopProduction() {

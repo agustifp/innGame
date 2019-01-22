@@ -6,20 +6,21 @@ import android.afebrerp.com.inngame.domain.model.entity.Player
 import android.afebrerp.com.inngame.domain.model.entity.Resources
 
 interface MainPresenter {
-    interface Presenter{
+    interface Presenter {
         fun startGame()
         fun paintInitialState()
         fun isGameRunning(): Boolean
         fun stopGame()
+        fun restartGame()
     }
 
-    interface View{
+    interface View {
         fun industryUpdatedListener(industry: Industry)
         fun trailerGeneratedListener(hub: Hub)
         fun hubUpdatedListener(hub: Hub)
         fun resourcesGeneratedListener(resources: Resources)
-        fun errorGameControlerListener(string: String)
-        fun paintFirstState(player:Player)
+        fun errorGameControllerListener(string: String)
+        fun paintFirstState(player: Player)
         fun onGameOver()
     }
 }
