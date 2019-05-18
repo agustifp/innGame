@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="android.afebrerp.com.gameon">
+
+    <application>
+        <activity
+                android:name="android.afebrerp.com.gameon.presentation.GameOnActivity"
+                android:label="@string/app_name" />
+
+        <activity
+                android:name="android.afebrerp.com.gameover.presentation.GameOverActivity"
+                android:label="@string/app_name" />
+    </application>
+
+</manifest>

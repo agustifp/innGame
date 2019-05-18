@@ -1,29 +1,32 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
 
 android {
     compileSdkVersion 28
+
+
     defaultConfig {
-        applicationId "android.afebrerp.com.inngame"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     // Test dependencies
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "com.android.support.test:runner:$testRunner"
@@ -37,10 +40,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$androidXVersion"
     implementation "com.google.android.material:material:$googleMaterial"
     implementation "androidx.constraintlayout:constraintlayout:$androidxConstrainLayout"
-
-    // Glide
-    implementation "com.github.bumptech.glide:glide:$glide"
-    kapt "com.github.bumptech.glide:compiler:$glide"
 
     //Data dependencies
     implementation "com.google.code.gson:gson:$gsonVersion"
@@ -61,14 +60,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Koin for Kotlin apps
-    implementation "org.koin:koin-java:$koinVersion"
-    implementation "org.koin:koin-core:$koinVersion"
-    implementation "org.koin:koin-android:$koinVersion"
-    implementation "org.koin:koin-android-viewmodel:$koinVersion"
-    implementation "org.koin:koin-android-scope:$koinVersion"
+    implementation "org.koin:koin-core:$rootProject.ext.koinVersion"
+    testImplementation "org.koin:koin-test:$rootProject.ext.koinVersion"
     implementation project(path: ':gameover')
     implementation project(path: ':gameon')
-    implementation project(path: ':navigator')
-
-
 }

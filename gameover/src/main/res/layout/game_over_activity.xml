@@ -14,4 +14,16 @@
             android:layout_height="wrap_content"
             android:text="GAME OVER"/>
 
+
+    <Button
+            android:id="@+id/buttonGameOn"
+            android:background="@color/colorAccent"
+            android:textSize="40sp"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAME ON!!!"/>
+
+
 </LinearLayout>

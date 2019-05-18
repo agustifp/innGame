@@ -1,11 +1,11 @@
 package android.afebrerp.com.inngame.presentation.main
 
+import android.afebrerp.com.gameover.presentation.GameOverActivity
 import android.afebrerp.com.inngame.R
 import android.afebrerp.com.inngame.domain.model.entity.Hub
 import android.afebrerp.com.inngame.domain.model.entity.Industry
 import android.afebrerp.com.inngame.domain.model.entity.Player
 import android.afebrerp.com.inngame.domain.model.entity.Resources
-import android.afebrerp.com.inngame.presentation.gameover.GameOverActivity
 import android.content.Intent
 import android.os.Bundle
 
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), KoinComponent, MainPresenter.View {
 
     override fun onGameOver() {
         gameOverReached = true
-        startActivity(Intent(this, GameOverActivity::class.java))
+        startActivity(Intent(this, Class.forName("android.afebrerp.com.gameover.presentation.GameOverActivity")))
     }
 
     private fun clickLogic() {

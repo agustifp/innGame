@@ -7,15 +7,15 @@ object Constants {
     const val INITIAL_GASOLINE_RESOURCE = 20
 
     //time constants
-    const val INDUSTRY_BUILD_TIME = 30000L
-    const val HUB_BUILD_TIME = 30000L
-    const val TRAILER_BUILD_TIME = 60000L
-    const val CONSTRUCTION_SECONDS = 60000L
+//    const val INDUSTRY_BUILD_TIME = 30000L
+//    const val HUB_BUILD_TIME = 30000L
+//    const val TRAILER_BUILD_TIME = 60000L
+//    const val CONSTRUCTION_SECONDS = 60000L
 
     //debug
-//    const val INDUSTRY_BUILD_TIME = 100L
-//    const val HUB_BUILD_TIME = 500L
-//    const val TRAILER_BUILD_TIME = 500L
-//    const val CONSTRUCTION_SECONDS = 500L
+    const val INDUSTRY_BUILD_TIME = 50L
+    const val HUB_BUILD_TIME = 50L
+    const val TRAILER_BUILD_TIME = 50L
+    const val CONSTRUCTION_SECONDS = 50L
 
 }
